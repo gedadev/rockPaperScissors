@@ -18,12 +18,37 @@
     <h2>Rock Paper Scissors</h2>
     <script>
         //array with the choices
-        const choices = ["Rock", "Paper", "Scissors"];
+        const choices = ["rock", "paper", "scissors"];
+
+        //choices
+        const playerSelection = prompt("Introduce your choice").toLowerCase();
+        const computerSelection = computerPlay();
 
         //Return a random value of the choices array
         function computerPlay(){
             return choices[Math.floor(Math.random() * 3)];
         }
+
+        //Takes the choices and compare them
+        function play(player, computer){
+            console.log(`player: ${player}`);
+            console.log(`computer: ${computer}`);
+
+            if(player !== computer){
+                if(player === "rock" && computer === "scissors"){
+                    return `You win! ${player} beats ${computer}`;
+                } else if(player === "paper" && computer === "rock"){
+                    return `You win! ${player} beats ${computer}`;
+                } else if(player === "scissors" && computer === "paper"){
+                    return `You win! ${player} beats ${computer}`;
+                } else {
+                    return `You loose! ${computer} beats ${player}`;
+                }
+            } else {
+                return "It's a tie";
+            }
+        }
+        
 
     </script>
 </body>
