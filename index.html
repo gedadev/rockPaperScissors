@@ -21,8 +21,12 @@
         const choices = ["rock", "paper", "scissors"];
 
         //choices
-        const playerSelection = prompt("Introduce your choice").toLowerCase();
-        const computerSelection = computerPlay();
+        let playerSelection = "";
+        let computerSelection = "";
+
+        //scores
+        let playerScore = 0;
+        let computerScore = 0;
 
         //Return a random value of the choices array
         function computerPlay(){
@@ -36,19 +40,33 @@
 
             if(player !== computer){
                 if(player === "rock" && computer === "scissors"){
-                    return `You win! ${player} beats ${computer}`;
+                    playerScore ++;
                 } else if(player === "paper" && computer === "rock"){
-                    return `You win! ${player} beats ${computer}`;
+                    playerScore ++;
                 } else if(player === "scissors" && computer === "paper"){
-                    return `You win! ${player} beats ${computer}`;
+                    playerScore ++;
                 } else {
-                    return `You loose! ${computer} beats ${player}`;
+                    computerScore ++;
                 }
+            }
+        }
+        
+        //Creates an iteration for 5 plays, generates new choices before passing the parameters. Compares the scores and declares a winner
+        function game(){
+            for(let i = 0; i < 5; i++){
+                playerSelection = prompt("Introduce your choice").toLowerCase();
+                computerSelection = computerPlay();
+                play(playerSelection, computerSelection);
+            }
+            if(playerScore > computerScore){
+                return `You win! Player score:${playerScore} Computer score:${computerScore}`;
+            } else if(computerScore > playerScore){
+                return `You lose! Player score:${playerScore} Computer score:${computerScore}`;
             } else {
                 return "It's a tie";
             }
         }
-        
+        console.log(game());
 
     </script>
 </body>
