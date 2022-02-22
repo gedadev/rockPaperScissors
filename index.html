@@ -11,12 +11,40 @@
             flex-direction: column;
             align-items: center;
         }
+        p{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <h1>Let's play!</h1>
-    <h2>Rock Paper Scissors</h2>
+    <div>
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div class="results"></div>
     <script>
+        //Event listeners
+        const result = document.querySelector('.results');
+        const para = document.createElement('p');
+        const winner = document.createElement('p');
+        const rock = document.querySelector('#rock');
+        const paper = document.querySelector('#paper');
+        const scissors = document.querySelector('#scissors');
+
+        rock.addEventListener('click', (e) => {
+            play(e.target.id, computerPlay());
+        });
+        
+        paper.addEventListener('click', (e) => {
+            play(e.target.id, computerPlay());
+        });
+
+        scissors.addEventListener('click', (e) => {
+            play(e.target.id, computerPlay());
+        });
+
         //array with the choices
         const choices = ["rock", "paper", "scissors"];
 
@@ -25,32 +53,40 @@
         let computerSelection = "";
 
         //scores
-        let playerScore = 0;
-        let computerScore = 0;
+        //let playerScore = 0;
+        //let computerScore = 0;
 
-        //Return a random value of the choices array
+        //random choice generator
         function computerPlay(){
             return choices[Math.floor(Math.random() * 3)];
         }
 
-        //Takes the choices and compare them
+        //round play
         function play(player, computer){
-            console.log(`player: ${player}`);
-            console.log(`computer: ${computer}`);
+            para.innerHTML = `Player: ${player} <br>Computer: ${computer}`;
+            result.appendChild(para);
 
             if(player !== computer){
                 if(player === "rock" && computer === "scissors"){
-                    playerScore ++;
+                    winner.textContent = `You win`;
+                    result.appendChild(winner);
                 } else if(player === "paper" && computer === "rock"){
-                    playerScore ++;
+                    winner.textContent = `You win`;
+                    result.appendChild(winner);
                 } else if(player === "scissors" && computer === "paper"){
-                    playerScore ++;
+                    winner.textContent = `You win`;
+                    result.appendChild(winner);
                 } else {
-                    computerScore ++;
+                    winner.textContent = `You loose`;
+                    result.appendChild(winner);
                 }
+            } else {
+                winner.textContent = `It's a tie`;
+                result.appendChild(winner);
             }
         }
-        
+
+        /*
         //Creates an iteration for 5 plays, generates new choices before passing the parameters. Compares the scores and declares a winner
         function game(){
             for(let i = 0; i < 5; i++){
@@ -67,6 +103,7 @@
             }
         }
         console.log(game());
+        */
 
     </script>
 </body>
