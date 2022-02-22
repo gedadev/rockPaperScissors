@@ -18,17 +18,18 @@
 </head>
 <body>
     <h1>Let's play!</h1>
-    <div>
+    <div class="buttons">
         <button id="rock">Rock</button>
         <button id="paper">Paper</button>
         <button id="scissors">Scissors</button>
     </div>
     <div class="results"></div>
     <script>
-        //Event listeners
+        //Selectors
+        const buttons = document.querySelector('.buttons');
         const result = document.querySelector('.results');
         const para = document.createElement('p');
-        const winner = document.createElement('p');
+        const roundWinner = document.createElement('p');
         const rock = document.querySelector('#rock');
         const paper = document.querySelector('#paper');
         const scissors = document.querySelector('#scissors');
@@ -53,8 +54,12 @@
         let computerSelection = "";
 
         //scores
-        //let playerScore = 0;
-        //let computerScore = 0;
+        let playerScore = 0;
+        let computerScore = 0;
+
+        if(playerScore < 5 || computerScore < 5){
+
+        }
 
         //random choice generator
         function computerPlay(){
@@ -68,21 +73,48 @@
 
             if(player !== computer){
                 if(player === "rock" && computer === "scissors"){
-                    winner.textContent = `You win`;
-                    result.appendChild(winner);
+                    playerScore++;
+                    roundWinner.innerHTML = `You win!<br>Player: ${playerScore}<br>Computer: ${computerScore}`;
+                    result.appendChild(roundWinner);
+                    gameWinner();
                 } else if(player === "paper" && computer === "rock"){
-                    winner.textContent = `You win`;
-                    result.appendChild(winner);
+                    playerScore++;
+                    roundWinner.innerHTML = `You win!<br>Player: ${playerScore}<br>Computer: ${computerScore}`;
+                    result.appendChild(roundWinner);
+                    gameWinner();
                 } else if(player === "scissors" && computer === "paper"){
-                    winner.textContent = `You win`;
-                    result.appendChild(winner);
+                    playerScore++;
+                    roundWinner.innerHTML = `You win!<br>Player: ${playerScore}<br>Computer: ${computerScore}`;
+                    result.appendChild(roundWinner);
+                    gameWinner();
                 } else {
-                    winner.textContent = `You loose`;
-                    result.appendChild(winner);
+                    computerScore++;
+                    roundWinner.innerHTML = `You loose!<br>Player: ${playerScore}<br>Computer: ${computerScore}`;
+                    result.appendChild(roundWinner);
+                    gameWinner();
                 }
             } else {
-                winner.textContent = `It's a tie`;
-                result.appendChild(winner);
+                roundWinner.innerHTML = `It's a tie!<br>Player: ${playerScore}<br>Computer: ${computerScore}`;
+                result.appendChild(roundWinner);
+            }
+        }
+
+        //game winner
+        function gameWinner(){
+            if(playerScore === 5 || computerScore === 5){
+                if(playerScore > computerScore){
+                    para.textContent = "Player wins";
+                    result.appendChild(para);
+                    buttons.removeChild(rock);
+                    buttons.removeChild(paper);
+                    buttons.removeChild(scissors);
+                } else {
+                    para.textContent = "Computer wins";
+                    result.appendChild(para);
+                    buttons.removeChild(rock);
+                    buttons.removeChild(paper);
+                    buttons.removeChild(scissors);
+                }
             }
         }
 
